@@ -1,0 +1,27 @@
+package br.com.es.gerenciamento.acceptance;
+
+
+import org.junit.jupiter.api.Test;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class UsuarioAcceptanceTest {
+
+
+    @Test
+    public void deveAbrirNavegador(){
+
+        WebDriver driver = new ChromeDriver();
+
+
+        driver.get(
+                "http://localhost:8080"
+        );
+
+
+        driver.quit();
+
+    }
+
+}

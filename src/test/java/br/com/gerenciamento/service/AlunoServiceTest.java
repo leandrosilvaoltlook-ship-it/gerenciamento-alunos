@@ -44,4 +44,62 @@ public class AlunoServiceTest {
         Assert.assertThrows(ConstraintViolationException.class, () -> {
                 this.serviceAluno.save(aluno);});
     }
+
+    @Test
+public void findByNomeContainingIgnoreCase() {
+
+    Aluno aluno1 = new Aluno();
+    aluno1.setNome("Leonardo");
+    aluno1.setMatricula("111");
+    aluno1.setCurso(Curso.ADMINISTRACAO);
+    aluno1.setStatus(Status.ATIVO);
+    aluno1.setTurno(Turno.NOTURNO);
+
+    Aluno aluno2 = new Aluno();
+    aluno2.setNome("Maria");
+    aluno2.setMatricula("222");
+    aluno2.setCurso(Curso.ADMINISTRACAO);
+    aluno2.setStatus(Status.ATIVO);
+    aluno2.setTurno(Turno.NOTURNO);
+
+    serviceAluno.save(aluno1);
+    serviceAluno.save(aluno2);
+
+    Assert.assertEquals(
+            1,
+            serviceAluno
+                    .findByNomeContainingIgnoreCase("leo")
+                    .size());
+
+    Assert.assertEquals(
+            "Leonardo",
+            serviceAluno
+                    .findByNomeContainingIgnoreCase("leo")
+                    .get(0)
+                    .getNome());
+}
+
+@Test
+public void findAll() {
+
+    Aluno aluno1 = new Aluno();
+    aluno1.setNome("Carlos");
+    aluno1.setMatricula("333");
+    aluno1.setCurso(Curso.ADMINISTRACAO);
+    aluno1.setStatus(Status.ATIVO);
+    aluno1.setTurno(Turno.NOTURNO);
+
+    Aluno aluno2 = new Aluno();
+    aluno2.setNome("Fernanda");
+    aluno2.setMatricula("444");
+    aluno2.setCurso(Curso.ADMINISTRACAO);
+    aluno2.setStatus(Status.ATIVO);
+    aluno2.setTurno(Turno.NOTURNO);
+
+    serviceAluno.save(aluno1);
+    serviceAluno.save(aluno2);
+
+    Assert.assertTrue(
+            serviceAluno.findAll().size() >= 2);
+}
 }
